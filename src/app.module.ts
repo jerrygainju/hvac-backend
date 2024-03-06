@@ -7,7 +7,7 @@ import { SignupModule } from './Signup/signup.module';
 require('dotenv').config();
 
 @Module({
-  imports: [  MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'hvac-calculation'}),
+  imports: [  MongooseModule.forRoot(process.env.DATABASE,{dbName: 'hvac-calculation'}),
   SignupModule
 ],
   controllers: [AppController],
