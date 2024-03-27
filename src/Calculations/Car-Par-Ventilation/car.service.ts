@@ -9,6 +9,10 @@ export class CarService {
   constructor(@InjectModel(Car.name) private carModel: Model<Car>) {}
 
   async postCar(car:CarDto): Promise<CarDto>  {
+    const projectName = await this.carModel.findOne( {projectName : car.projectName} );
+    if (projectName){
+      throw new HttpException('Project name already exists', HttpStatus.BAD_REQUEST);
+    }
     const carData = await this.carModel.create(car)
     return carData
   }
